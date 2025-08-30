@@ -1,13 +1,29 @@
+*, *::before, *::after { /* CSS reset*/
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   display: grid;
   grid-template-columns: 4fr 2fr;  /* Main + Recent takes up 4 parts, Sidebar takes 2 part */
   grid-template-rows: auto 1fr 1fr auto auto;  /* Auto for header/footer, flexible middle row */
-  grid-gap: .5em;
-  height: 100vh;  /* Full viewport height */
+  grid-gap: .25em;
+  min-height: 100vh;  /* Full viewport height */
   margin: 0;
 }
 
-header,
+header{
+  grid-column: 1 / span 2;  /* Header and footer span both columns */
+  background: #eaeaea;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 20px ;
+  height: 5vw;  /* Fixed height */
+}
+
 footer {
   grid-column: 1 / span 2;  /* Header and footer span both columns */
   background: #eaeaea;
@@ -48,8 +64,8 @@ section { /*Recent*/
 /* Demo Specific Styles */
 body {
   margin: 0 auto;
-  max-width: 56em;
-  padding: .5em 0;
+  /*max-width: 56em;*/
+  padding: .25em 0;
 }
 
 /* Make Layout Responsive */
