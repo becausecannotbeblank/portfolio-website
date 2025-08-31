@@ -7,8 +7,9 @@
 body {
   display: grid;
   grid-template-columns: 4fr 2fr;  /* Main + Recent takes up 4 parts, Sidebar takes 2 part */
-  grid-template-rows: auto 1fr 1fr auto auto;  /* Auto for header/footer, flexible middle row */
-  grid-gap: .25em;
+  grid-template-rows: auto 1fr 1fr auto;  /* Auto for header/footer, flexible middle row */
+  grid-gap: 1px;
+  background-color: black;
   min-height: 100vh;  /* Full viewport height */
   margin: 0;
 }
@@ -44,7 +45,7 @@ main {
 
 aside {
   grid-column: 2;  /* Sidebar occupies the second column */
-  grid-row: 2/-3;
+  grid-row: 2 / 4;
   background: #eaeaea;
   display: flex;
   align-items: center;
@@ -59,13 +60,6 @@ section { /*Recent*/
   align-items: center;
   justify-content: center;
   height: 100%;  /* Ensure 'Recent' section isn't squashed */
-}
-
-/* Demo Specific Styles */
-body {
-  margin: 0 auto;
-  /*max-width: 56em;*/
-  padding: .25em 0;
 }
 
 /* Make Layout Responsive */
