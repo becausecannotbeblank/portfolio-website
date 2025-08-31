@@ -22,7 +22,7 @@ header{
   align-items: center;
   justify-content: space-between;
   padding: 0px 20px ;
-  height: 5vw;  /* Fixed height */
+  height: 40px;  /* Fixed height */
 }
 
 footer {
@@ -31,7 +31,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 5vw;  /* Fixed height */
+  height: 40px;  /* Fixed height */
 }
 
 main {
@@ -62,13 +62,42 @@ section { /*Recent*/
   height: 100%;  /* Ensure 'Recent' section isn't squashed */
 }
 
-/* Make Layout Responsive */
 @media (max-width: 700px) {
-  body {
-    grid-template-columns: 1fr;  /* Stack everything in one column for smaller screens */
+  header,
+  footer{
+    height: 40px;
   }
-  
-  main, aside, section {
-    grid-column: 1 / span 1;  /* Each section takes full width */
+
+  body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr 1fr 1fr auto; /* header, main, recent, sidebar, footer */
+    grid-gap: 1px; /* thin black lines */
+    min-height: 100vh; /* full viewport height */
+  }
+
+  header {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  main {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  section { /* Recent */
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  aside { /* Sidebar last */
+    grid-column: 1;
+    grid-row: 4;
+  }
+
+  footer {
+    grid-column: 1;
+    grid-row: 5;
   }
 }
