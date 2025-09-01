@@ -63,7 +63,11 @@ main {
   z-index: 0;
 }
 
-/*main:hover .background-image {   removed hover.
+/*main:hover .background-image { removed hover since we only click the overlays
+  filter: brightness(100%);
+}
+
+.recent-item:hover .background-image {
   filter: brightness(100%);
 }*/
 
@@ -78,6 +82,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  transition: .3s;
 }
 
 .main-image-overlay .date {
@@ -94,6 +99,10 @@ main {
 
 .main-image-overlay .description {
   font-size: clamp(0.9rem, 1.5vw, 1rem);
+}
+
+.main-image-overlay:hover{
+    background: rgba(68, 68, 68, 0.5);
 }
 
 aside {
@@ -147,6 +156,11 @@ section {
   background: rgba(0,0,0,0.5);
   padding: 1em;
   color: snow;
+  transition: .3s;
+}
+
+.recent-article .overlay:hover{
+    background: rgba(68, 68, 68, 0.5);
 }
 
 /* overlay text */
