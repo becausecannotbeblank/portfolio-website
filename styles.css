@@ -30,6 +30,15 @@ header{
   height: 40px;  /* Fixed height */
 }
 
+nav{
+  display: flex;
+  flex-direction: row;
+}
+
+.navigation-button{
+  padding: 20px;
+}
+
 footer {
   grid-column: 1 / span 2;  /* Header and footer span both columns */
   background: #eaeaea;
