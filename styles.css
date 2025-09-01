@@ -67,17 +67,7 @@ main {
   filter: brightness(100%);
 }*/
 
-/* Featured article overlay */
-.featured-article {
-  display: block;
-  width: 100%;
-  text-decoration: none;
-  color: white;
-  height: 100%;
-  position: relative;
-}
-
-.image-overlay {
+.main-image-overlay {
   position: absolute;
   z-index: 1;
   bottom: 0;
@@ -90,19 +80,19 @@ main {
   justify-content: flex-end;
 }
 
-.image-overlay .date {
-  font-size: 1rem;
+.main-image-overlay .date {
+  font-size: 1.25rem;
   color: goldenrod;
   font-variant-caps: all-small-caps;
   margin-bottom: 0.25em;
 }
 
-.image-overlay .title {
+.main-image-overlay .title {
   font-size: clamp(1.2rem, 2vw, 1.5rem); /* responsive font size */
   margin-bottom: 0.25em;
 }
 
-.image-overlay .description {
+.main-image-overlay .description {
   font-size: clamp(0.9rem, 1.5vw, 1rem);
 }
 
@@ -116,16 +106,64 @@ aside {
   height: 100%;  /* Ensure sidebar stretches vertically */
 }
 
-section { /*Recent*/
-  grid-column: 1 / 2;  /* Recent section spans the first column */
-  background: #eaeaea;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;  /* Ensure 'Recent' section isn't squashed */
+section {
+  grid-column: 1 / 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 1px; /* space between the squares */
+  padding: 0;
 }
 
+/* card wrapper */
+.recent-item {
+  position: relative;   /* contain absolute children */
+  min-height: 200px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* actual background image inside card */
+.recent-item .background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(70%);
+  z-index: 0;  /* sits at the back */
+}
+
+.recent-article {
+  position: relative;
+  display: block;
+  width: 100%;
+  z-index: 1;  /* sits above background */
+}
+
+.recent-article .overlay {
+  background: rgba(0,0,0,0.5);
+  padding: 1em;
+  color: snow;
+}
+
+/* overlay text */
+.recent-article .date { color: goldenrod; font-variant-caps: all-small-caps; margin: 0 0 .25rem 0; font-size: 1.25rem; }
+.recent-article .title { margin-bottom: 0.25em; font-size: clamp(1.1rem, 1vw, 1.4rem); }
+.recent-article .description { margin: 0; font-size: clamp(0.8rem, 1.4vw, .9rem);}
+
+/* responsive: stack on small screens */
 @media (max-width: 1000px) {
+  .recent-grid { 
+    grid-template-columns: 1fr; 
+  }
+  
+  .recent-link { 
+    height: 40%; 
+  } /* bigger overlay on narrow screens */
+
   header,
   footer{
     height: 40px;
