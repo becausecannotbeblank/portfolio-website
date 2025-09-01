@@ -4,6 +4,11 @@
   padding: 0;
 }
 
+a{
+  text-decoration: none;
+  color: snow;
+}
+
 body {
   display: grid;
   grid-template-columns: 4fr 2fr;  /* Main + Recent takes up 4 parts, Sidebar takes 2 part */
@@ -35,18 +40,30 @@ footer {
 }
 
 main {
-  grid-column: 1 / 2;  /* Keep the grid placement */
+  grid-column: 1 / 2;
   display: flex;
-  align-items: flex-end;   /* align overlay to bottom */
+  align-items: flex-end;
   justify-content: center;
-  height: 100%;  /* stretch to fill grid cell */
-  transition: 0.25s ease-in-out; /* for hover*/
-  filter: brightness(75%); /* grey tint */
+  height: 100%;
+  position: relative; /* needed for absolute children */
 }
 
-main:hover
-{
-  filter: brightness(100%); /* grey tint */
+.background-image {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%;
+  height: 100%;
+  background-image: url('assets/mainplaceholder.webp');
+  background-size: cover;
+  background-position: top;
+  filter: brightness(75%);
+  transition: 0.25s ease-in-out; /* animate the filter */
+  z-index: 0;
+}
+
+main:hover .background-image {
+  filter: brightness(100%);
 }
 
 /* Featured article overlay */
@@ -64,7 +81,7 @@ main:hover
   z-index: 1;
   bottom: 0;
   width: 100%;
-  height: 50%; /* bottom half of the image */
+  height: 30%; /* bottom half of the image */
   padding: 2em;
   background: rgba(0,0,0,0.5); /* semi-transparent overlay */
   display: flex;
@@ -86,18 +103,6 @@ main:hover
   font-size: 1rem;
 }
 
-.background-image{
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  width: 100%; /* needed for the overlay positioning */
-  height: 100%;
-  background-image: url('assets/mainplaceholder.webp'); /* your featured image */
-  background-size: cover;
-  background-position: top;
-  z-index: 0;
-}
-
 aside {
   grid-column: 2;  /* Sidebar occupies the second column */
   grid-row: 2 / 4;
@@ -117,7 +122,7 @@ section { /*Recent*/
   height: 100%;  /* Ensure 'Recent' section isn't squashed */
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
   header,
   footer{
     height: 40px;
