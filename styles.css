@@ -58,13 +58,13 @@ main {
   background-size: cover;
   background-position: top;
   filter: brightness(75%);
-  transition: 0.25s ease-in-out; /* animate the filter */
+  /*transition: 0.25s ease-in-out; /* animate the filter - removed hover*/
   z-index: 0;
 }
 
-main:hover .background-image {
+/*main:hover .background-image {   removed hover.
   filter: brightness(100%);
-}
+}*/
 
 /* Featured article overlay */
 .featured-article {
