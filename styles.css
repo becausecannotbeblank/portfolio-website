@@ -12,16 +12,20 @@ a{
 body {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: auto auto;
-  grid-gap: 1px;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
   background-color: black;
-  min-height: 100vh;  /* Full viewport height */
-  margin: 0;
 }
+
+main { border-right: 1px solid black; }
+header { border-bottom: 1px solid black; }
+footer {border-bottom: none}
+section { border-top: 1px solid black; border-right: none;}
 
 header{
   grid-column: 1 / span 2;  /* Header and footer span both columns */
-  background: #eaeaea;
+  background: #212121;;
+  color: snow;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -40,12 +44,13 @@ nav{
 }
 
 footer {
-  grid-column: 1 / span 2;  /* Header and footer span both columns */
-  background: #eaeaea;
+  grid-column: 1 / -1;  /* span full width */
+  background: #212121;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px;  /* Fixed height */
+  min-height: 40px;     /* don’t shrink smaller than this */
+  height: auto;         /* allow growth */
 }
 
 main {
@@ -117,7 +122,7 @@ main {
 aside {
   grid-column: 2;  /* Sidebar occupies the second column */
   grid-row: 2 / 4;
-  background: #eaeaea;
+  background: #212121;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -132,19 +137,23 @@ aside {
   width: 100%;
   align-items: center;
   justify-content: flex-start;
-  background-color: black;
-  gap: 1px;
+  background-color: #212121;
 }
 
 .sidebar-recommended{
   align-self: flex-start;
+  background-color: #212121;
   color: goldenrod;
-  padding: 4px 4px 4px;
+  width: 100%;
+  padding: 1em;
   font-variant-caps: all-small-caps;
   font-size: 1.25rem;
+  border-bottom: 1px solid black;
 }
 
 .sidebar-slot {
+  background: #212121;
+  border-bottom: 1px solid black;
   position: relative;   /* contain absolutely positioned children */
   width: 100%;
   height: 100%;    /* give it some height */
@@ -161,7 +170,6 @@ aside {
   height: 100%;
   background-size: cover;
   background-position: center;
-  filter: brightness(30%);
   z-index: 0;
 }
 
@@ -170,7 +178,6 @@ aside {
   z-index: 1;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
   padding: 1em;
   display: flex;
   flex-direction: column;
@@ -204,29 +211,17 @@ section {
   grid-column: 1 / 2;
   display: grid;
   grid-template-columns: 1fr 1fr; /* two equal columns */
-  gap: 1px; /* nicer spacing */
   align-items: start;   /* <- keeps items at natural height */
 }
 
 .recent-item {
-  background: #222;
+  background: #212121;
   color: snow;
   display: block;       /* <- remove flex so it doesn’t stretch */
   min-height: unset;    /* <- let it size to content */
+  border-right: 1px black solid;
+  border-bottom: 1px black solid;
 }
-
-/* actual background image inside card
-.recent-item .background-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 100px;
-  background-size: cover;
-  background-position: center;
-  filter: brightness(70%);
-  z-index: 0;  /* sits at the back 
-}*/
 
 .recent-article {
   position: relative;
@@ -236,7 +231,6 @@ section {
 }
 
 .recent-article .overlay {
-  background: rgba(0,0,0,0.5);
   padding: 4em;
   color: snow;
   transition: .3s;
@@ -263,7 +257,6 @@ section {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto auto auto; /* header, main, recent, sidebar, footer */
-    grid-gap: 1px; /* thin black lines */
     min-height: 100vh; /* full viewport height */
   }
 
