@@ -119,6 +119,7 @@ aside {
   grid-row: 2 / 4;
   background: #eaeaea;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;  /* Ensure sidebar stretches vertically */
@@ -130,7 +131,7 @@ aside {
   height: 100%;
   width: 100%;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   background-color: black;
   gap: 1px;
 }
@@ -143,10 +144,60 @@ aside {
   font-size: 1.25rem;
 }
 
-.sidebar-slot{
+.sidebar-slot {
+  position: relative;   /* contain absolutely positioned children */
+  width: 100%;
+  height: 100%;    /* give it some height */
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.sidebar-slot .background-image {
+  position: absolute;
+  top: 0; 
+  left: 0;
   width: 100%;
   height: 100%;
-  background-color: #eaeaea;;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(75%);
+  z-index: 0;
+}
+
+.sidebar-image-overlay {
+  position: relative;   /* sits above background */
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: snow;
+  transition: .3s;
+}
+
+.sidebar-image-overlay:hover {
+  background: rgba(68,68,68,0.5);
+}
+
+.sidebar-slot .date{
+  color: goldenrod; 
+  font-variant-caps: all-small-caps; 
+  margin: 0 0 .25rem 0; 
+  font-size: 1.25rem;
+}
+
+.sidebar-slot .title{
+  margin-bottom: 0.25em; 
+  font-size: clamp(1.2rem, 2vw, 1.5rem)
+}
+
+.sidebar-slot .description{ 
+  margin: 0; 
+  font-size: clamp(0.8rem, 1.4vw, .9rem);
 }
 
 section {
@@ -172,7 +223,7 @@ section {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100px;
   background-size: cover;
   background-position: center;
   filter: brightness(70%);
