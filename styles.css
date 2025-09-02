@@ -43,16 +43,6 @@ nav{
   padding: 20px;
 }
 
-footer {
-  grid-column: 1 / -1;  /* span full width */
-  background: #212121;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 40px;     /* don’t shrink smaller than this */
-  height: auto;         /* allow growth */
-}
-
 main {
   grid-column: 1 / 2;
   display: flex;
@@ -91,7 +81,7 @@ main {
   bottom: 0;
   width: 100%;
   min-height: 30%; /* bottom 30% of the image */
-  padding: 4em;
+  padding: 2em;
   background: rgba(0,0,0,0.5); /* semi-transparent overlay */
   display: flex;
   flex-direction: column;
@@ -113,6 +103,7 @@ main {
 
 .main-image-overlay .description {
   font-size: clamp(0.9rem, 1.5vw, 1rem);
+  max-width: 60ch;
 }
 
 .main-image-overlay:hover{
@@ -211,7 +202,7 @@ section {
   grid-column: 1 / 2;
   display: grid;
   grid-template-columns: 1fr 1fr; /* two equal columns */
-  align-items: start;   /* <- keeps items at natural height */
+  align-items: stretch;   /* <- keeps items at natural height */
 }
 
 .recent-item {
@@ -224,16 +215,19 @@ section {
 }
 
 .recent-article {
-  position: relative;
-  display: block;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   z-index: 1;  /* sits above background */
 }
 
 .recent-article .overlay {
-  padding: 4em;
-  color: snow;
-  transition: .3s;
+  padding: 2em;
+  flex: 1; /* take up available vertical space */
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: flex-start; /* keep text at bottom if you want */
 }
 
 .recent-article .overlay:hover{
@@ -243,7 +237,18 @@ section {
 /* overlay text */
 .recent-article .date { color: goldenrod; font-variant-caps: all-small-caps; margin: 0 0 .25rem 0; font-size: 1.25rem; }
 .recent-article .title { margin-bottom: 0.25em; font-size: clamp(1rem, 2vw, 1.25rem); }
-.recent-article .description { margin: 0; font-size: clamp(0.8rem, 1.4vw, .9rem);}
+.recent-article .description { margin: 0; font-size: clamp(0.8rem, 1.4vw, .9rem); max-width: 65ch;}
+
+footer {
+  grid-column: 1 / -1;  /* span full width */
+  background: #212121;
+  color: snow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;     /* don’t shrink smaller than this */
+  height: auto;         /* allow growth */
+}
 
 /* responsive: stack on small screens */
 @media (max-width: 1000px) {
