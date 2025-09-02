@@ -11,8 +11,8 @@ a{
 
 body {
   display: grid;
-  grid-template-columns: 4fr 2fr;  /* Main + Recent takes up 4 parts, Sidebar takes 2 part */
-  grid-template-rows: auto 1fr 1fr auto;  /* Auto for header/footer, flexible middle row */
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto;
   grid-gap: 1px;
   background-color: black;
   min-height: 100vh;  /* Full viewport height */
@@ -53,7 +53,7 @@ main {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  min-height: 200px;
+  min-height: 500px;
   height: 100%;
   position: relative; /* needed for absolute children */
 }
@@ -86,7 +86,7 @@ main {
   bottom: 0;
   width: 100%;
   min-height: 30%; /* bottom 30% of the image */
-  padding: 2em;
+  padding: 4em;
   background: rgba(0,0,0,0.5); /* semi-transparent overlay */
   display: flex;
   flex-direction: column;
@@ -203,21 +203,19 @@ aside {
 section {
   grid-column: 1 / 2;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 1px; /* space between the squares */
-  padding: 0;
+  grid-template-columns: 1fr 1fr; /* two equal columns */
+  gap: 1px; /* nicer spacing */
+  align-items: start;   /* <- keeps items at natural height */
 }
 
-/* card wrapper */
 .recent-item {
-  position: relative;   /* contain absolute children */
-  min-height: 200px;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
+  background: #222;
+  color: snow;
+  display: block;       /* <- remove flex so it doesn’t stretch */
+  min-height: unset;    /* <- let it size to content */
 }
 
-/* actual background image inside card */
+/* actual background image inside card
 .recent-item .background-image {
   position: absolute;
   top: 0;
@@ -227,8 +225,8 @@ section {
   background-size: cover;
   background-position: center;
   filter: brightness(70%);
-  z-index: 0;  /* sits at the back */
-}
+  z-index: 0;  /* sits at the back 
+}*/
 
 .recent-article {
   position: relative;
@@ -239,7 +237,7 @@ section {
 
 .recent-article .overlay {
   background: rgba(0,0,0,0.5);
-  padding: 1em;
+  padding: 4em;
   color: snow;
   transition: .3s;
 }
@@ -255,13 +253,6 @@ section {
 
 /* responsive: stack on small screens */
 @media (max-width: 1000px) {
-  .recent-grid { 
-    grid-template-columns: 1fr; 
-  }
-  
-  .recent-link { 
-    height: 40%; 
-  } /* bigger overlay on narrow screens */
 
   header,
   footer{
@@ -271,7 +262,7 @@ section {
   body {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr 1fr 1fr auto; /* header, main, recent, sidebar, footer */
+    grid-template-rows: auto 1fr auto auto auto; /* header, main, recent, sidebar, footer */
     grid-gap: 1px; /* thin black lines */
     min-height: 100vh; /* full viewport height */
   }
