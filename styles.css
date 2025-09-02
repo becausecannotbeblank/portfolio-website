@@ -124,6 +124,23 @@ aside {
   height: 100%;  /* Ensure sidebar stretches vertically */
 }
 
+.sidebar-container{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  background-color: black;
+  gap: 1px;
+}
+
+.sidebar-slot{
+  width: 100%;
+  height: 100%;
+  background-color: #eaeaea;;
+}
+
 section {
   grid-column: 1 / 2;
   display: grid;
@@ -174,7 +191,7 @@ section {
 
 /* overlay text */
 .recent-article .date { color: goldenrod; font-variant-caps: all-small-caps; margin: 0 0 .25rem 0; font-size: 1.25rem; }
-.recent-article .title { margin-bottom: 0.25em; font-size: clamp(1.1rem, 1vw, 1.4rem); }
+.recent-article .title { margin-bottom: 0.25em; font-size: clamp(1.2rem, 2vw, 1.5rem); }
 .recent-article .description { margin: 0; font-size: clamp(0.8rem, 1.4vw, .9rem);}
 
 /* responsive: stack on small screens */
