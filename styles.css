@@ -34,13 +34,19 @@ header{
   height: 40px;  /* Fixed height */
 }
 
+.logo{
+  font-weight: bolder;
+  font-size: large;
+  font-family: 'Courier New', Courier, monospace;
+}
+
 nav{
   display: flex;
   flex-direction: row;
 }
 
 .navigation-button{
-  padding: 20px;
+  padding: 10px;
 }
 
 main {
@@ -63,17 +69,8 @@ main {
   background-size: cover;
   background-position: top;
   filter: brightness(75%);
-  /*transition: 0.25s ease-in-out; /* animate the filter - removed hover*/
   z-index: 0;
 }
-
-/*main:hover .background-image { removed hover since we only click the overlays
-  filter: brightness(100%);
-}
-
-.recent-item:hover .background-image {
-  filter: brightness(100%);
-}*/
 
 .main-image-overlay {
   position: absolute;
@@ -87,6 +84,20 @@ main {
   flex-direction: column;
   justify-content: flex-end;
   transition: .3s;
+}
+
+.main-image-overlay .content-inner {
+    max-width: min(75ch, calc(100% - 5rem - 2em)); /* 65ch = line length limit & calc(...) = space for arrow/divider */
+}
+
+.main-image-overlay::after{       /*divider*/
+  content: "";
+  position: absolute;
+  top: 10%;               /* not full height, just decorative */
+  bottom: 10%;
+  right: calc(5rem + 2rem); /* same as arrow size + spacing */
+  width: 1px;
+  background: rgba(255,255,255,0.3);
 }
 
 .main-image-overlay .date {
@@ -104,6 +115,24 @@ main {
 .main-image-overlay .description {
   font-size: clamp(0.9rem, 1.5vw, 1rem);
   max-width: 60ch;
+}
+
+.main-image-overlay .read-more-arrow {
+  position: absolute;
+  right: 2em;       /* distance from overlay edge */
+  top: 50%;         /* vertically center */
+  transform: translateY(-50%); /* perfect centering */
+  width: 3em;       /* size */
+  height: 3em;
+  color: goldenrod; /* initial color */
+  pointer-events: none; /* doesn’t block overlay click */
+  transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 2;
+}
+
+.main-image-overlay:hover .read-more-arrow {
+  transform: translateY(-50%) translateX(5px); /* subtle slide on hover */
+  color: white;                               /* highlight */
 }
 
 .main-image-overlay:hover{
@@ -198,6 +227,25 @@ aside {
   font-size: clamp(0.8rem, 1.4vw, .9rem);
 }
 
+.sidebar-slot .read-more-arrow {
+  position: absolute;
+  right: 2em;       /* distance from overlay edge */
+  top: 50%;         /* vertically center */
+  transform: translateY(-50%); /* perfect centering */
+  width: 3em;       /* size */
+  height: 3em;
+  color: goldenrod; /* initial color */
+  pointer-events: none; /* doesn’t block overlay click */
+  transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 2;
+}
+
+.sidebar-slot:hover .read-more-arrow {
+  transform: translateY(-50%) translateX(5px); /* subtle slide on hover */
+  color: white;                               /* highlight */
+}
+
+
 section {
   grid-column: 1 / 2;
   display: grid;
@@ -206,6 +254,7 @@ section {
 }
 
 .recent-item {
+  position: relative;
   background: #212121;
   color: snow;
   display: block;       /* <- remove flex so it doesn’t stretch */
