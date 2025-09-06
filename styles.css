@@ -2,7 +2,7 @@
   font-family: 'Playfair Display';
   src: url('assets/fonts/PlayfairDisplay/PlayfairDisplay-VariableFont_wght.ttf') format('woff2'),
        url('assets/fonts/PlayfairDisplay/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('woff');
-  font-weight: 400;
+  font-weight: 100 900;
   font-style: normal;
   font-display: block; /*shows nothing until our font is loaded, no more FOUT*/
 }
@@ -11,7 +11,7 @@
   font-family: 'LeagueSpartan';
   src: url('assets/fonts/LeagueSpartan/LeagueSpartan-VariableFont_wght.ttf') format('woff2'),
        url('assets/fonts/LeagueSpartan/LeagueSpartan-VariableFont_wght.ttf') format('woff');
-  font-weight: 400;
+  font-weight: 100 900;
   font-style: normal;
   font-display: block; /*shows nothing until our font is loaded, no more FOUT*/
 }
@@ -61,12 +61,12 @@ body {
 /* Fonts */
 .title{
   font-family: 'LeagueSpartan', 'serif';
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .description{
   font-family: 'Merriweather', 'sans-serif';
-  font-size: 100;
+  font-weight: 400;
 }
 
 main { border-right: 1px solid black; }
