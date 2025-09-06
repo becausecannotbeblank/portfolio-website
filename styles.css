@@ -1,3 +1,40 @@
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('assets/fonts/PlayfairDisplay/PlayfairDisplay-VariableFont_wght.ttf') format('woff2'),
+       url('assets/fonts/PlayfairDisplay/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block; /*shows nothing until our font is loaded, no more FOUT*/
+}
+
+@font-face {
+  font-family: 'LeagueSpartan';
+  src: url('assets/fonts/LeagueSpartan/LeagueSpartan-VariableFont_wght.ttf') format('woff2'),
+       url('assets/fonts/LeagueSpartan/LeagueSpartan-VariableFont_wght.ttf') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block; /*shows nothing until our font is loaded, no more FOUT*/
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('assets/fonts/Merriweather/Merriweather-VariableFont_opsz-wdth-wght.ttf') format('woff2');
+  font-weight: 100 900;   /* full range */
+  font-stretch: 75% 125%; /* optional, only if your font supports width axis */
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('assets/fonts/Merriweather/Merriweather-Italic-VariableFont_opsz-wdth-wght.ttf') format('woff2');
+  font-weight: 100 900;
+  font-stretch: 75% 125%;
+  font-style: italic;
+  font-display: block;
+}
+
+
 *, *::before, *::after { /* CSS reset*/
   box-sizing: border-box;
   margin: 0;
@@ -14,7 +51,7 @@ body {
   grid-template-columns: 2fr 1fr;
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
-  font-family: 'Merriweather', 'sans serif';
+  font-family: 'Merriweather', 'sans-serif';
   font-size: 1rem;
   line-height: 1.6;
   color: snow;
@@ -23,7 +60,13 @@ body {
 
 /* Fonts */
 .title{
-  font-family: 'Playfair Display', 'Arial';
+  font-family: 'LeagueSpartan', 'serif';
+  font-weight: 600;
+}
+
+.description{
+  font-family: 'Merriweather', 'sans-serif';
+  font-size: 100;
 }
 
 main { border-right: 1px solid black; }
@@ -56,6 +99,8 @@ nav{
 
 .navigation-button{
   padding: 24px;
+  font-size: 14px;
+  font-family: 'Inter', 'sans-serif';
 }
 
 .header-right{
