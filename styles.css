@@ -14,13 +14,16 @@ body {
   grid-template-columns: 2fr 1fr;
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
-  background-color: black;
   font-family: 'Merriweather', 'sans serif';
   font-size: 1rem;
   line-height: 1.6;
   color: snow;
   background: black;
+}
 
+/* Fonts */
+.title{
+  font-family: 'sans-serif';
 }
 
 main { border-right: 1px solid black; }
