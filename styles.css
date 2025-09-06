@@ -84,9 +84,9 @@ body {
   font-weight: 700;
 }
 
-.date {
-  font-family: 'IBMPlexMono', monospace;
-  font-weight: 700;
+.description {
+  font-family: 'Merriweather', monospace;
+  font-weight: 400;
   font-style: normal;
 }
 
