@@ -23,7 +23,7 @@ body {
 
 /* Fonts */
 .title{
-  font-family: 'sans-serif';
+  font-family: 'Playfair Display', 'Arial';
 }
 
 main { border-right: 1px solid black; }
