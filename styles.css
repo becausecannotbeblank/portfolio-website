@@ -246,7 +246,7 @@ aside {
   background-color: #212121;
 }
 
-.sidebar-recommended{
+.sidebar-popular{
   align-self: flex-start;
   background-color: #212121;
   color: goldenrod;
@@ -374,6 +374,29 @@ section {
 .recent-article .date { color: goldenrod; font-variant-caps: all-small-caps; margin: 0 0 .25rem 0; font-size: 1.25rem; }
 .recent-article .title { margin-bottom: 0.25em; font-size: clamp(1.25rem, 2vw, 1.25rem); }
 .recent-article .description { margin: 0; font-size: clamp(0.8rem, 1.4vw, .9rem); max-width: 65ch;}
+
+.carousel{
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: pink;
+}
+
+.carousel-recommended{
+  grid-column: 1 / -1;
+  padding: 20px;
+  background-color: rgb(102, 38, 49);
+}
+
+.carousel-slot{
+  display: flex;
+  flex-direction: column;
+  background-color: mediumspringgreen;
+  height: 375px;
+  min-width: 25%;
+  max-width: 25%;
+}
 
 footer {
   grid-column: 1 / -1;  /* span full width */
