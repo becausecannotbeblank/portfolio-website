@@ -375,27 +375,57 @@ section {
 .recent-article .title { margin-bottom: 0.25em; font-size: clamp(1.25rem, 2vw, 1.25rem); }
 .recent-article .description { margin: 0; font-size: clamp(0.8rem, 1.4vw, .9rem); max-width: 65ch;}
 
-.carousel{
+.carousel-wrapper {
   grid-column: 1 / -1;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: pink;
+  overflow: hidden;           /* hides offscreen slides */
+  background-color: #212121;
 }
+
 
 .carousel-recommended{
   grid-column: 1 / -1;
   padding: 20px;
-  background-color: rgb(102, 38, 49);
+  background-color: #212121;
+  color: goldenrod;
+  font-variant-caps: all-small-caps;
+  font-size: 1.25rem;
 }
 
-.carousel-slot{
+.carousel-track {
   display: flex;
-  flex-direction: column;
-  background-color: mediumspringgreen;
+  transition: transform 0.5s ease;
+  will-change: transform;     /* smoother animations */
+}
+
+.carousel-slot {
+  flex: 0 0 25%;              /* 4 per view (25% each) */
   height: 375px;
-  min-width: 25%;
-  max-width: 25%;
+  background-color: mediumspringgreen;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-dots {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  background-color: #212121;
+}
+
+.carousel-dots .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.carousel-dots .dot.active {
+  background: goldenrod;
 }
 
 footer {
