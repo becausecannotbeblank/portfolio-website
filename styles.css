@@ -96,12 +96,11 @@ body {
   font-weight: 400;
 }
 
-main { border-right: 1px solid black; }
 header { border-bottom: 1px solid black; }
-footer {border-bottom: none; border-top: 1px solid black;;}
+main { border-right: 1px solid black; }
 section { border-top: 1px solid black; border-right: none;}
 .carousel-dots { border-top: 1px solid black; }
-
+footer {border-bottom: none; border-top: 1px solid black;;}
 
 header{
   grid-column: 1 / span 2;  /* Header and footer span both columns */
