@@ -111,8 +111,14 @@ header{
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 20px ;
+  padding: 0px;
+  margin: 0px;
   height: 60px;  /* Fixed height */
+}
+
+.logo-container{
+  padding: 24px;
+  border-right: 1px solid black;
 }
 
 .logo{
@@ -124,6 +130,7 @@ header{
 nav{
   display: flex;
   flex-direction: row;
+  border: 1px solid black;
 }
 
 .navigation-button{
@@ -135,6 +142,7 @@ nav{
 .header-right{
   display: flex;
   flex-direction: row;
+  border-left: 1px solid black;
 }
 
 main {
@@ -401,12 +409,12 @@ section {
 }
 
 .carousel-slot:nth-child(1) { background-image: url('assets/recent2.jpg'); }
-.carousel-slot:nth-child(2) { background-image: url('assets/sideplaceholder.jpg'); }
+.carousel-slot:nth-child(2) { background-image: url('assets/modelmain.avif'); }
 .carousel-slot:nth-child(3) { background-image: url('assets/side3.jpg'); }
-.carousel-slot:nth-child(4) { background-image: url('assets/sideplaceholder.jpg'); }
-.carousel-slot:nth-child(5) { background-image: url('assets/side2.jpg'); }
-.carousel-slot:nth-child(6) { background-image: url('assets/sideplaceholder.jpg'); }
-.carousel-slot:nth-child(7) { background-image: url('assets/side4.png'); }
+.carousel-slot:nth-child(4) { background-image: url('assets/side2.jpg'); }
+.carousel-slot:nth-child(5) { background-image: url('assets/side4.png'); }
+.carousel-slot:nth-child(6) { background-image: url('assets/side1.jpg')}
+.carousel-slot:nth-child(7) { background-image: url('assets/recent1.png'); }
 .carousel-slot:nth-child(8) { background-image: url('assets/sideplaceholder.jpg'); }
 /* etc. */
 
