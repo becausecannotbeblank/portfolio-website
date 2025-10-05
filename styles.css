@@ -18,7 +18,7 @@
 
 @font-face {
   font-family: 'Merriweather';
-  src: url('assets/fonts/Merriweather/Merriweather-VariableFont_opsz-wdth-wght.ttf') format('woff2');
+  src: url('assets/fonts/Merriweather/Merriweather-Italic-VariableFont_opsz-wdth-wght.ttf.ttf') format('woff2');
   font-weight: 100 900;   /* full range */
   font-stretch: 75% 125%; /* optional, only if your font supports width axis */
   font-style: normal;
@@ -98,7 +98,8 @@ body {
 
 .prevnex-button,
 .carousel-recommended,
-.sidebar-popular{
+.sidebar-popular,
+footer *{
   font-family: 'IBMPlexMono', 'sans-serif';
   font-style: normal;
   font-weight: 400;
@@ -174,7 +175,7 @@ main {
   background-image: url('assets/mainplaceholder.webp');
   background-size: cover;
   background-position: top;
-  filter: brightness(75%);
+  filter:brightness(75%);
   z-index: 0;
 }
 
@@ -408,7 +409,7 @@ section {
 
 .carousel-recommended{
   grid-column: 1 / -1;
-  padding: 20px;
+  padding: 24px;
   background-color: #212121;
   color: goldenrod;
   font-variant-caps: all-small-caps;
@@ -474,15 +475,27 @@ section {
   font-size: 1.25rem;
 }
 
+
 footer {
   grid-column: 1 / -1;  /* span full width */
   background: #212121;
   color: snow;
   display: flex;
-  align-items: center;
   justify-content: center;
+  gap: 150px;
   min-height: 40px;     /* don’t shrink smaller than this */
   height: auto;         /* allow growth */
+  padding: 24px;
+}
+
+footer * {
+  color: goldenrod; 
+  font-variant-caps: all-small-caps; 
+  margin: 0 0 .25rem 0; 
+  font-size: 1.25rem;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* responsive: stack on small screens */
