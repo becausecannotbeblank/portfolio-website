@@ -107,9 +107,9 @@ footer *{
 
 header { border-bottom: 1px solid black; }
 main { border-right: 1px solid black; }
-section { border-top: 1px solid black; border-right: none;}
+section { border-top: 1px solid black;}
 .carousel-dots { border-top: 1px solid black; }
-.carousel-recommended {border-bottom: 1px solid black;}
+.carousel-recommended {border-bottom: 1px solid black; border-top: 1px solid black;}
 footer {border-bottom: none; border-top: 1px solid black;;}
 
 header{
@@ -278,7 +278,7 @@ aside {
   font-variant-caps: all-small-caps;
   font-size: 1.75rem;
   border-bottom: 1px solid;
-  border-color: rgba(0, 0, 0, 0.25);
+  border-color: rgba(0, 0, 0, 1);
 }
 
 .sidebar-slot {
@@ -371,7 +371,6 @@ section {
   display: block;       /* <- remove flex so it doesn’t stretch */
   min-height: unset;    /* <- let it size to content */
   border-right: 1px black solid;
-  border-bottom: 1px black solid;
 }
 
 .recent-article {
