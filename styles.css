@@ -18,7 +18,7 @@
 
 @font-face {
   font-family: 'Merriweather';
-  src: url('assets/fonts/Merriweather/Merriweather-Italic-VariableFont_opsz-wdth-wght.ttf.ttf') format('woff2');
+  src: url('assets/fonts/Merriweather/Merriweather-VariableFont_opsz-wdth-wght.ttf.ttf') format('woff2');
   font-weight: 100 900;   /* full range */
   font-stretch: 75% 125%; /* optional, only if your font supports width axis */
   font-style: normal;
