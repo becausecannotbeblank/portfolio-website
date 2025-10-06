@@ -368,6 +368,7 @@ aside {
 section {
   grid-column: 1 / 2;
   display: grid;
+  flex-direction: row;
   grid-template-columns: 1fr 1fr; /* two equal columns */
   align-items: stretch;   /* <- keeps items at natural height */
 }
@@ -378,7 +379,18 @@ section {
   color: snow;
   display: block;       /* <- remove flex so it doesn’t stretch */
   min-height: unset;    /* <- let it size to content */
-  border-right: 1px black solid;
+  border-right: 1px solid;
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+.recent-item-2 { /*asds a border on the right as well so it stands apart from the sidebar*/
+  position: relative;
+  background: #212121;
+  color: snow;
+  display: block;       /* <- remove flex so it doesn’t stretch */
+  min-height: unset;    /* <- let it size to content */
+  border-right: 1px solid;
+  border-color: rgba(0, 0, 0, 1);
 }
 
 .recent-article {
@@ -492,6 +504,7 @@ footer {
   background: #212121;
   color: snow;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   gap: 150px;
   min-height: 40px;     /* don’t shrink smaller than this */
@@ -533,6 +546,10 @@ footer * :hover{
   header {
     grid-column: 1;
     grid-row: 1;
+  }
+
+  nav{
+    display: none;
   }
 
   main {
