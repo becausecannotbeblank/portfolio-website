@@ -507,14 +507,20 @@ footer * {
   min-width: 150px;
   display: flex;
   flex-direction: column;
+  transition: 0.3s;
 }
+
+footer * :hover{
+  color: rgb(255, 255, 255);
+}
+
 
 /* responsive: stack on small screens */
 @media (max-width: 1000px) {
 
   header,
   footer{
-    height: 40px;
+    min-height: 40px;
   }
 
   body {
@@ -532,6 +538,10 @@ footer * {
   main {
     grid-column: 1;
     grid-row: 2;
+  }
+
+  .sidebar-popular{
+    border-top: 1px solid black;
   }
 
   section { /* Recent */
