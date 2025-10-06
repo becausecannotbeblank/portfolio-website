@@ -96,6 +96,7 @@ body {
   font-weight: 400;
 }
 
+nav,
 .prevnext-button,
 .carousel-recommended,
 .sidebar-popular,
@@ -140,13 +141,20 @@ header{
 nav{
   display: flex;
   flex-direction: row;
-  border: 1px solid black;
+  justify-content: center;
+  color: goldenrod; 
+  font-variant-caps: all-small-caps; 
+  margin: 0 0 .25rem 0; 
+  font-size: 1.25rem;
+}
+
+nav :hover{
+  color: rgb(255, 255, 255);
 }
 
 .navigation-button{
   padding: 24px;
-  font-size: 14px;
-  font-family: 'Inter', 'sans-serif';
+  transition: .3s;
 }
 
 .header-right{
@@ -435,7 +443,6 @@ section {
 .carousel-slot {
   flex: 0 0 25%;              /* 4 per view (25% each) */
   height: 375px;
-  background-color: mediumspringgreen;
   display: flex;
   align-items: center;
   justify-content: center;
