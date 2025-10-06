@@ -1,6 +1,8 @@
 const track = document.querySelector('.carousel-track');
 const dots = document.querySelectorAll('.dot');
 
+const prevnext = document.querySelector('.prevnex-button')
+
 dots.forEach(dot => {
   dot.addEventListener('click', () => {
     // remove active from all
@@ -12,3 +14,4 @@ dots.forEach(dot => {
     track.style.transform = `translateX(${offset}%)`;
   });
 });
+

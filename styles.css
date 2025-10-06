@@ -96,7 +96,7 @@ body {
   font-weight: 400;
 }
 
-.prevnex-button,
+.prevnext-button,
 .carousel-recommended,
 .sidebar-popular,
 footer *{
@@ -467,11 +467,16 @@ section {
   background: goldenrod;
 }
 
-.carousel-dots .prevnex-button{
+.carousel-dots .prevnext-button{
   color: goldenrod; 
   font-variant-caps: all-small-caps; 
   margin: 0 0 .25rem 0; 
   font-size: 1.25rem;
+  transition: 0.3s;
+}
+
+.carousel-dots .prevnext-button:hover{
+  color: rgb(255, 255, 255);
 }
 
 
