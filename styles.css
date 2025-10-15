@@ -79,21 +79,29 @@ body {
 }
 
 /* Fonts */
-.title{
+.title,
+.carousel-title{
   font-family: 'LeagueSpartan', 'serif';
   font-weight: 700;
 }
 
-.description {
+.description,
+.carousel-description {
   font-family: 'Merriweather', monospace;
   font-weight: 400;
   font-style: normal;
 }
 
-.date{
+.description{
+  margin-bottom: 1em;
+}
+
+.date,
+.carousel-date {
   font-family: 'IBMPlexMono', 'sans-serif';
   font-style: normal;
   font-weight: 400;
+  text-transform: uppercase;
 }
 
 nav,
@@ -194,7 +202,7 @@ main {
   width: 100%;
   min-height: 30%; /* bottom 30% of the image */
   padding: 2em;
-  background: rgba(0,0,0,0.5); /* semi-transparent overlay */
+  background: rgba(68, 68, 68, 0.5); /* semi-transparent overlay */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -253,7 +261,7 @@ main {
 }
 
 .main-image-overlay:hover{
-    background: rgba(68, 68, 68, 0.5);
+  background: rgba(68, 68, 68, 0.5);
 }
 
 aside {
@@ -274,7 +282,7 @@ aside {
   width: 100%;
   align-items: center;
   justify-content: flex-start;
-  background-color: #212121;
+  background-color: #808080;
 }
 
 .sidebar-popular{
@@ -374,6 +382,7 @@ section {
 }
 
 .recent-item {
+  padding: 1em;
   position: relative;
   background: #212121;
   color: snow;
@@ -417,7 +426,7 @@ section {
 /* overlay text */
 .recent-article .date { color: goldenrod; font-variant-caps: all-small-caps; margin: 0 0 .25rem 0; font-size: 1.25rem; }
 .recent-article .title { margin-bottom: 0.25em; font-size: clamp(1.25rem, 2vw, 1.25rem); }
-.recent-article .description { margin: 0; font-size: clamp(0.8rem, 1.4vw, .9rem); max-width: 65ch;}
+.recent-article .description { margin-bottom: 1em; font-size: clamp(0.8rem, 1.4vw, .9rem); max-width: 65ch;}
 
 .carousel-wrapper {
   grid-column: 1 / -1;
@@ -456,11 +465,95 @@ section {
   flex: 0 0 25%;              /* 4 per view (25% each) */
   height: 375px;
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   background-size: cover;
   background-position: center;
-  filter: brightness(75%);
+}
+
+.carousel-slot:hover .carousel-overlay {
+  height: 100%;
+  background: rgba(68, 68, 68, 0.5);
+}
+
+.carousel-slot {
+  position: relative; /* needed for absolute children */
+  flex: 0 0 25%;
+  height: 375px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30%; /* instead of min-height */
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: rgba(68, 68, 68, 0.5);
+  border-top: 1px solid rgba(255,255,255,0.25);
+  transition: height 0.4s ease, background 0.4s ease;
+  padding-bottom: 8em;
+}
+
+.carousel-slot .carousel-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;          /* spacing between title and description */
+}
+
+.carousel-slot .carousel-title,
+.carousel-slot .carousel-description {
+  color: snow;  /* <-- add this */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.carousel-slot .carousel-title {
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  -webkit-line-clamp: 2;
+}
+
+.carousel-slot .carousel-description {
+  -webkit-line-clamp: 1;
+  opacity: 0;
+  transition: opacity 0.2s ease-out, -webkit-line-clamp 0s 0.4s; /* fast fade out */
+  margin-bottom: 3em;
+}
+
+.carousel-slot:hover .carousel-description {
+  -webkit-line-clamp: 6;
+  opacity: 1;
+  transition: opacity 0.4s ease-in 0.3s, -webkit-line-clamp 0s 0.4s; /* delay only on hover-in */
+}
+
+
+.carousel-slot:hover .carousel-description {
+  -webkit-line-clamp: 6;  /* show all lines */
+  opacity: 1;                 /* fade in */
+  transition-delay: 0.3s;     /* wait for overlay to expand */
+}
+
+.carousel-slot .carousel-date {
+  position: absolute;
+  bottom: 1em;
+  left: 1.25em;
+  font-size: 1.25rem;              /* same as sidebar/recent */
+  color: goldenrod;
+  font-family: 'IBMPlexMono', sans-serif; /* match sidebar/recent */
+  font-weight: 400;
+  font-style: normal;
+  font-variant-caps: all-small-caps;      /* match styling */
+  text-transform: uppercase;              /* optional, for consistency */
 }
 
 .carousel-dots {
