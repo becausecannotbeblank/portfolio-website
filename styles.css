@@ -393,6 +393,7 @@ section {
 }
 
 .recent-item-2 { /*asds a border on the right as well so it stands apart from the sidebar*/
+  padding: 1em; 
   position: relative;
   background: #212121;
   color: snow;
