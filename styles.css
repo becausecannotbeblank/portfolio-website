@@ -93,7 +93,7 @@ body {
 }
 
 .description{
-  margin-bottom: 1em;
+  margin-bottom: .5em;
 }
 
 .date,
@@ -201,7 +201,10 @@ main {
   bottom: 0;
   width: 100%;
   min-height: 30%; /* bottom 30% of the image */
-  padding: 2em;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
   background: rgba(68, 68, 68, 0.5); /* semi-transparent overlay */
   display: flex;
   flex-direction: column;
@@ -212,7 +215,7 @@ main {
 }
 
 .main-image-overlay .content-inner {
-    max-width: min(75ch, calc(100% - 5rem - 2em)); /* 65ch = line length limit & calc(...) = space for arrow/divider */
+  max-width: min(75ch, calc(100% - 5rem - 2em)); /* 65ch = line length limit & calc(...) = space for arrow/divider */
 }
 
 .main-image-overlay::after{       /*divider*/
@@ -225,21 +228,19 @@ main {
   background: rgba(255,255,255,0.25);
 }
 
-.main-image-overlay .date {
-  font-size: 1.25rem;
-  color: goldenrod;
-  font-variant-caps: all-small-caps;
-  margin-bottom: 0.25em;
-}
-
 .main-image-overlay .title {
   font-size: clamp(1.65rem, 2vw, 1.85rem); /* responsive font size */
-  margin-bottom: 0.25em;
 }
 
 .main-image-overlay .description {
   font-size: clamp(0.9rem, 1.5vw, 1rem);
   max-width: 60ch;
+}
+
+.main-image-overlay .date {
+  font-size: 1.25rem;
+  color: goldenrod;
+  font-variant-caps: all-small-caps;
 }
 
 .main-image-overlay .read-more-arrow {
