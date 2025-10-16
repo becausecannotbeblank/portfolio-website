@@ -61,6 +61,44 @@
   padding: 0;
 }
 
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --overlay-color: rgba(0,0,0,0.05);
+  --accent-color: #333;
+}
+
+[data-theme="dark"] {
+  --bg-color: #0d0d0d;
+  --text-color: #f1f1f1;
+  --overlay-color: rgba(255,255,255,0.05);
+  --accent-color: #ddd;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navigation-button, .theme-toggle {
+  color: var(--text-color);
+}
+
+.theme-toggle .theme-icon {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  fill: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover .theme-icon {
+  transform: rotate(15deg);
+}
+
+
 a{
   text-decoration: none;
   color: snow;
@@ -173,10 +211,10 @@ nav :hover{
 }
 
 .menu-icon {
+    display: none;
     background: none;
     border: none;
     cursor: pointer;
-    display: flex;
     align-items: center;
     justify-content: center;
     padding: 24px;
@@ -193,6 +231,31 @@ nav :hover{
 
 /* Optional hover effect */
 .menu-icon:hover .hamburger-icon {
+    transform: scale(1.1);
+    stroke: snow;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.theme-icon {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: goldenrod;
+    stroke-width: 2;
+    transition: transform 0.3s ease, stroke 0.3s ease;
+}
+
+/* Optional hover scaling */
+.theme-toggle:hover .theme-icon {
     transform: scale(1.1);
     stroke: snow;
 }
@@ -668,6 +731,10 @@ footer * :hover{
   nav{
     display: none;
   }
+
+  .menu-icon {
+    display: flex;
+}
 
   main {
     grid-column: 1;

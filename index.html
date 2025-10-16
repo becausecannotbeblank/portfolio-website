@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +20,16 @@
         </nav>
 
         <div class="header-right">
+            <button class="navigation-button theme-toggle" aria-label="Toggle light/dark mode">
+            <svg xmlns="http://www.w3.org/2000/svg" class="theme-icon" viewBox="0 0 24 24">
+                <mask id="moon-mask">
+                <rect x="0" y="0" width="24" height="24" fill="white"/>
+                <circle cx="14" cy="10" r="8" fill="black"/>
+                </mask>
+                <circle cx="12" cy="12" r="8" fill="currentColor" mask="url(#moon-mask)"/>
+            </svg>
+            </button>
+
             <button class="navigation-button menu-icon" aria-label="Menu">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="hamburger-icon">
                     <line x1="3" y1="6" x2="21" y2="6" />
