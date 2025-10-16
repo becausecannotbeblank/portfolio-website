@@ -172,6 +172,31 @@ nav :hover{
   border-color: rgba(0, 0, 0, 0.25);
 }
 
+.menu-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.hamburger-icon {
+    width: 24px;
+    height: 24px;
+    stroke: goldenrod;
+    stroke-width: 2;
+    stroke-linecap: round;
+    transition: transform 0.3s ease;
+}
+
+/* Optional hover effect */
+.menu-icon:hover .hamburger-icon {
+    transform: scale(1.1);
+    stroke: snow;
+}
+
 main {
   grid-column: 1 / 2;
   display: flex;
