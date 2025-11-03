@@ -69,7 +69,6 @@
 
 /* ---------------------------
    Theme tokens (light default)
-   Toggle by setting: <html data-theme="dark"> or "light"
 ---------------------------- */
 :root {
   --color-bg: #ffffff;
@@ -80,7 +79,7 @@
   --color-accent: #daa520;            /* goldenrod */
   --color-border: #e5e5e5;
 
-  --overlay: rgba(68, 68, 68, 0.5);   /* for your main/carousel overlays */
+  --overlay: rgba(68, 68, 68, 0.5);   /* solid overlay for hero/carousel */
   --overlay-weak: rgba(0, 0, 0, 0.06);
 
   --tr-fast: 0.2s ease;
@@ -120,14 +119,10 @@ body {
 }
 
 /* Type families */
-.title, .carousel-title {
-  font-family: 'LeagueSpartan', serif;
-  font-weight: 700;
-}
-.description, .carousel-description {
-  font-family: 'Merriweather', serif;
-  font-weight: 400;
-}
+.title, .carousel-title { font-family: 'LeagueSpartan', serif; font-weight: 700; }
+.description, .carousel-description { font-family: 'Merriweather', serif; font-weight: 400; }
+
+/* Global date style (unified) */
 .date, .carousel-date,
 nav, .prevnext-button, .carousel-recommended, .sidebar-popular, footer * {
   font-family: 'IBMPlexMono', sans-serif;
@@ -258,7 +253,7 @@ main {
   width: 100%;
   min-height: 30%;
   padding: 1.5em;
-  background: var(--overlay);                 /* keep your solid overlay */
+  background: var(--overlay);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -281,8 +276,9 @@ main {
 
 .main-image-overlay .title { font-size: clamp(1.65rem, 2vw, 1.85rem); color: var(--color-on-image); }
 .main-image-overlay .description { font-size: clamp(0.9rem, 1.5vw, 1rem); max-width: 60ch; color: var(--color-on-image); }
-.main-image-overlay .date { font-size: 1.25rem; color: var(--color-accent); font-variant-caps: all-small-caps; }
+.main-image-overlay .date { font-size: 1rem; margin-top: 1em; color: var(--color-accent); }
 
+/* Arrow */
 .read-more-arrow {
   position: absolute;
   right: 2em;
@@ -304,70 +300,76 @@ main {
 ---------------------------- */
 aside {
   grid-column: 2;
-  grid-row: 2 / 4;
+  grid-row: 2 / 4;              /* span MAIN + RECENT */
   background: var(--color-surface);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: block;               /* let inner container control layout */
 }
 
 .sidebar-container{
   display: flex;
   flex-direction: column;
+  height: 100%;                 /* fill full aside height */
   width: 100%;
   align-items: stretch;
-  justify-content: flex-start;
+  justify-content: stretch;     /* let slots expand */
   background: var(--color-surface);
-  height: auto;  /* prevent phantom tiny 6th slot */
+  min-height: 0;                /* allow flex children to shrink if needed */
 }
 
+/* Popular stays fixed; it won't grow */
 .sidebar-popular{
-  align-self: stretch;
+  flex: 0 0 auto;               /* fixed-size header */
   background: var(--color-surface);
   color: var(--color-accent);
-  padding: 1em;
+  padding: 1.25em;
   font-variant-caps: all-small-caps;
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   border-bottom: 1px solid var(--color-border);
 }
 
+/* Each slot expands equally to fill remaining space */
 .sidebar-slot {
+  flex: 1 1 0;                  /* equal-height columns */
+  min-height: 0;                /* avoid overflow creating extra bar */
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
   position: relative;
   width: 100%;
   display: flex;
-  align-items: flex-end;
+  align-items: stretch;         /* child overlay fills height */
+  overflow: hidden;             /* trim overflow from long titles */
 }
-.sidebar-slot:last-child { border-bottom: none; } /* kill the phantom divider */
+.sidebar-slot:last-child { border-bottom: none; }
 
-.sidebar-slot .background-image {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  z-index: 0;
-}
-
-/* NO gradient: just text, and only color changes on hover */
+/* NO gradient: just text, and only color change on hover */
 .sidebar-image-overlay {
+  flex: 1 1 auto;               /* fill slot height */
+  height: 100%;
+  width: 100%;
   position: relative;
   z-index: 1;
-  width: 100%;
-  padding: 1.5em;
+  padding: 1rem 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  background: transparent;
   color: var(--color-text);
-  transition: color var(--tr-med);
-  background: transparent;           /* no gradient default */
+  transition: color var(--tr-med), background var(--tr-med);
 }
-.sidebar-image-overlay .title { color: var(--color-text); transition: color var(--tr-med); }
-.sidebar-image-overlay .date  { color: var(--color-accent); transition: color var(--tr-med); }
+.sidebar-image-overlay .title {
+  color: var(--color-text);
+  font-size: clamp(1rem, 1.05vw, 1.1rem);  /* smaller and consistent */
+  line-height: 1.3;
+}
+.sidebar-image-overlay .date  {
+  color: var(--color-accent);
+  font-size: 1rem;
+  margin-top: auto;             /* push date to bottom */
+}
 
-/* Only text color change on hover */
+/* Text-only hover + subtle solid background */
 .sidebar-image-overlay:hover .title { color: var(--color-on-image); }
-.sidebar-image-overlay:hover .date  { color: var(--color-on-image); }
+
+.sidebar-image-overlay:hover { background: var(--overlay-weak); }
 
 /* ---------------------------
    Recent (Section)
@@ -388,31 +390,45 @@ section {
   display: block;
   border-right: 1px solid var(--color-border);
 }
-.recent-item-2 { border-right: 1px solid var(--color-border); }
 
+/* anchor fills card height */
 .recent-article {
   display: flex;
   flex-direction: column;
   height: 100%;
-  z-index: 1;
 }
 
+/* overlay fills the entire tile so hover covers everything */
 .recent-article .overlay {
-  padding: 1.5em;
+  flex: 1;                 /* fill parent */
   display: flex;
   flex-direction: column;
-  align-items: start;
-  gap: .5em;
+  justify-content: space-between;
+  padding: 1.5em;
+  background: transparent; /* no gradient */
   transition: background var(--tr-med);
-  background: transparent;            /* no gradient */
 }
 .recent-article .overlay:hover {
-  background: var(--overlay-weak);    /* soft solid (not gradient) on hover */
+  background: var(--overlay-weak); /* subtle solid hover */
 }
 
-.recent-article .date { color: var(--color-accent); font-size: 1.25rem; }
-.recent-article .title { font-size: clamp(1.25rem, 2vw, 1.25rem); color: var(--color-text); }
-.recent-article .description { font-size: clamp(0.8rem, 1.4vw, .9rem); max-width: 65ch; color: var(--color-text); }
+.recent-article .title {
+  font-size: clamp(1.1rem, 2vw, 1.2rem);
+  color: var(--color-text);
+  line-height: 1.3;
+}
+.recent-article .description {
+  font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+  max-width: 65ch;
+  color: var(--color-text);
+}
+
+/* bottom-aligned date (consistent) */
+.recent-article .date {
+  color: var(--color-accent);
+  font-size: 1rem;
+  margin-top: 1em;
+}
 
 /* ---------------------------
    Carousel
@@ -423,7 +439,7 @@ section {
   background: var(--color-surface);
   color: var(--color-accent);
   font-variant-caps: all-small-caps;
-  font-size: 1.75rem;
+  font-size: 1.25rem;
 }
 
 .carousel-wrapper {
@@ -465,20 +481,17 @@ section {
   bottom: 0;
   width: 100%;
   height: 30%;
-  padding: 1.5em;
+  padding: 1.25em;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background: var(--overlay);               /* solid, not gradient */
+  background: var(--overlay);
   border-top: 1px solid rgba(255,255,255,0.25);
   transition: height 0.4s ease, background 0.4s ease;
-  padding-bottom: 8em;
+  padding-bottom: 4em;
 }
 
-.carousel-slot:hover .carousel-overlay {
-  height: 100%;
-  /* keep same solid overlay color (no gradient) */
-}
+.carousel-slot:hover .carousel-overlay { height: 100%; }
 
 .carousel-slot .carousel-content {
   display: flex;
@@ -488,16 +501,16 @@ section {
 
 .carousel-slot .carousel-title,
 .carousel-slot .carousel-description {
-  color: var(--color-on-image);             /* solid text color */
+  color: var(--color-on-image);
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
 }
 
 .carousel-slot .carousel-title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   transition: all var(--tr-med);
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
 }
 
 .carousel-slot .carousel-description {
@@ -513,19 +526,16 @@ section {
   transition: opacity 0.4s ease-in 0.3s, -webkit-line-clamp 0s 0.4s;
 }
 
+/* unified date size */
 .carousel-slot .carousel-date {
   position: absolute;
   bottom: 1em;
   left: 1.25em;
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: var(--color-accent);
-  font-family: 'IBMPlexMono', sans-serif;
-  font-weight: 400;
-  font-variant-caps: all-small-caps;
-  text-transform: uppercase;
 }
 
-/* dots */
+/* dots + prev/next (text only, no borders) */
 .carousel-dots {
   grid-column: 1 / -1;
   display: flex;
@@ -536,27 +546,27 @@ section {
   background: var(--color-surface);
 }
 
+.prevnext-button {
+  border: none;
+  background: transparent;
+  padding: 0 .25rem;
+  color: var(--color-accent);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color var(--tr-med), opacity var(--tr-med);
+}
+.prevnext-button:hover { color: var(--color-text); }
+
 .carousel-dots .dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
   background: rgba(127,127,127,0.4);
   cursor: pointer;
-  transition: background var(--tr-med);
+  transition: background var(--tr-med), transform var(--tr-med);
 }
-.carousel-dots .dot.active {
-  background: var(--color-accent);
-}
-
-.carousel-dots .prevnext-button{
-  color: var(--color-accent);
-  font-variant-caps: all-small-caps;
-  font-size: 1.25rem;
-  transition: color var(--tr-med);
-}
-.carousel-dots .prevnext-button:hover{
-  color: var(--color-text);
-}
+.carousel-dots .dot:hover { transform: scale(1.1); }
+.carousel-dots .dot.active { background: var(--color-accent); }
 
 /* ---------------------------
    Footer
