@@ -200,8 +200,8 @@ nav .navigation-button:hover { color: var(--color-text); }
   width: 24px;
   height: 24px;
   fill: none;
-  stroke: var(--color-accent);
-  stroke-width: 2;
+/*  stroke: var(--color-accent);
+  stroke-width: 2;*/
   transition: transform var(--tr-med), stroke var(--tr-med);
 }
 .theme-toggle:hover .theme-icon {
@@ -367,7 +367,6 @@ aside {
 }
 
 /* Text-only hover + subtle solid background */
-.sidebar-image-overlay:hover .title { color: var(--color-on-image); }
 
 .sidebar-image-overlay:hover { background: var(--overlay-weak); }
 
