@@ -33,7 +33,7 @@
       </button>
 
       <!-- Hamburger (mobile) -->
-      <button class="navigation-button menu-icon" aria-label="Open menu" id="menuButton">
+      <button class="navigation-button menu-icon" aria-label="Open menu" id="menuButton" aria-controls="mobileMenu" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" class="hamburger-icon" viewBox="0 0 24 24" aria-hidden="true">
           <line x1="3" y1="6"  x2="21" y2="6"/>
           <line x1="3" y1="12" x2="21" y2="12"/>
@@ -41,6 +41,13 @@
         </svg>
       </button>
     </div>
+
+    <!-- Hamburger Menu (media) -->
+        <div class="hamburger-menu" id="mobileMenu" hidden>
+            <a class="navigation-button" href="#">News</a>
+            <a class="navigation-button" href="#">Search</a>
+            <a class="navigation-button" href="#">Archive</a>
+        </div>
   </header>
 
   <main>

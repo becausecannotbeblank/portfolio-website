@@ -140,7 +140,7 @@ body {
 .description, .carousel-description { font-family: 'Merriweather', serif; font-weight: 400; }
 
 /* Global date style (unified) */
-.date, .carousel-date,
+.date, .carousel-date, .hamburger-menu,
 nav, .prevnext-button, .carousel-recommended, .sidebar-popular, footer * {
   font-family: 'IBMPlexMono', sans-serif;
   font-weight: 400;
@@ -238,6 +238,10 @@ nav .navigation-button:hover { color: var(--color-text); }
 .menu-icon:hover .hamburger-icon {
   transform: scale(1.1);
   stroke: var(--color-text);
+}
+
+.hamburger-menu {
+  display: none;              /* desktop: off */
 }
 
 /* ---------------------------------------
@@ -465,7 +469,6 @@ section.recent {
 .carousel-track {
   display: flex;
   transition: transform 0.5s ease;
-  gap: 1px;
 }
 
 /* Assign per-slide image via CSS var */
@@ -485,7 +488,7 @@ section.recent {
   position: relative;
   align-items: center;
   justify-content: center;
-
+  border-right: 1px solid rgba(127,127,127,1);
   /* One cover photo + tint + grain */
   background-image:
     var(--grain-svg),
@@ -633,4 +636,38 @@ footer * :hover { color: var(--color-text); }
   .sidebar-container { height: auto; min-height: 0; }
   .sidebar-slot { flex: 0 0 auto; align-items: stretch; }
   .sidebar-image-overlay { min-height: 84px; }
+
+  .hamburger-menu {
+    position: absolute;
+    top: 60px;                /* same as header height */
+    right: 0;
+    left: 0;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    display: block;           /* exists in flow, but we'll hide with [hidden] */
+    padding: 0.5rem;
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform var(--tr-med), opacity var(--tr-med);
+    z-index: 1000;
+  }
+  .hamburger-menu.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  /* layout of links inside */
+  .hamburger-menu .navigation-button {
+    display: block;
+    color: goldenrod;
+    width: 100%;
+    text-align: left;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--color-border);
+    transition: color var(--tr-med);
+  }
+
+  .hamburger-menu .navigation-button:hover { color: var(--color-text); }
+  .hamburger-menu .navigation-button:last-child { border-bottom: none; }
 }
