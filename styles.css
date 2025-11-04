@@ -1,6 +1,6 @@
-/* ---------------------------
+/* ---------------------------------------
    Fonts
----------------------------- */
+---------------------------------------- */
 @font-face {
   font-family: 'Playfair Display';
   src: url('assets/fonts/PlayfairDisplay/PlayfairDisplay-VariableFont_wght.ttf') format('woff2'),
@@ -21,6 +21,7 @@
 
 @font-face {
   font-family: 'Merriweather';
+  /* NOTE: verify this path/extension (".ttf.ttf" looks accidental). */
   src: url('assets/fonts/Merriweather/Merriweather-VariableFont_opsz-wdth-wght.ttf.ttf') format('woff2');
   font-weight: 100 900;
   font-stretch: 75% 125%;
@@ -58,32 +59,43 @@
   font-style: italic;
 }
 
-/* ---------------------------
+/* ---------------------------------------
    Reset
----------------------------- */
+---------------------------------------- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* ---------------------------
+/* ---------------------------------------
    Theme tokens (light default)
----------------------------- */
+---------------------------------------- */
 :root {
   --color-bg: #ffffff;
   --color-surface: #f7f7f9;
   --color-text: #111111;
   --color-text-muted: #444;
   --color-on-image: #ffffff;
-  --color-accent: #daa520;            /* goldenrod */
+  --color-accent: #daa520;           /* goldenrod */
   --color-border: #e5e5e5;
 
-  --overlay: rgba(68, 68, 68, 0.5);   /* solid overlay for hero/carousel */
+  --overlay: rgba(68, 68, 68, 0.5);  /* solid overlay for hero/carousel panels */
   --overlay-weak: rgba(0, 0, 0, 0.06);
 
   --tr-fast: 0.2s ease;
-  --tr-med: 0.3s ease;
+  --tr-med:  0.3s ease;
+
+  /* Image unifier knobs */
+  --img-sat:      0.75;  /* lower = less saturated */
+  --img-ctr:      0.75;  /* lower = flatter contrast */
+  --img-bri:      0.98;  /* lower = darker */
+  --img-tint-rgb: 11,11,11;  /* #0b0b0b */
+  --img-tint-op:  0.20;      /* color wash opacity (0–1) */
+  --img-grain-op: 0.03;      /* grain strength (keep tiny) */
+
+  /* base64 SVG grain tile (neutral) */
+  --grain-svg: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC45IiBudW1PY3RhdmVzPSIyIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiBmaWx0ZXI9InVybCgjbikiLz48L3N2Zz4=");
 }
 
 html[data-theme="dark"] {
@@ -97,11 +109,16 @@ html[data-theme="dark"] {
 
   --overlay: rgba(68, 68, 68, 0.5);
   --overlay-weak: rgba(255,255,255,0.06);
+
+  /* slightly stronger wash/grain in dark mode */
+  --img-tint-rgb: 0,0,0;
+  --img-tint-op:  0.28;
+  --img-grain-op: 0.07;
 }
 
-/* ---------------------------
+/* ---------------------------------------
    Base
----------------------------- */
+---------------------------------------- */
 a { text-decoration: none; color: var(--color-text); }
 
 body {
@@ -132,16 +149,16 @@ nav, .prevnext-button, .carousel-recommended, .sidebar-popular, footer * {
 }
 
 /* Borders */
-header { border-bottom: 1px solid var(--color-border); }
+header { border-bottom: 1px solid rgba(127,127,127,0.4);}
 main   { border-right: 1px solid var(--color-border); }
 section{ border-top: 1px solid var(--color-border); }
 .carousel-dots { border-top: 1px solid var(--color-border); }
 .carousel-recommended { border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
 footer { border-top: 1px solid var(--color-border); }
 
-/* ---------------------------
+/* ---------------------------------------
    Header
----------------------------- */
+---------------------------------------- */
 header{
   grid-column: 1 / span 2;
   background: var(--color-surface);
@@ -163,7 +180,7 @@ header{
   font-family: 'Courier New', Courier, monospace;
 }
 
-nav{
+nav.site-nav{
   display: flex;
   gap: 0;
   color: var(--color-accent);
@@ -184,7 +201,9 @@ nav .navigation-button:hover { color: var(--color-text); }
 }
 
 /* Buttons in header */
-.navigation-button, .theme-toggle, .menu-icon {
+.navigation-button,
+.theme-toggle,
+.menu-icon {
   background: none;
   border: none;
   cursor: pointer;
@@ -195,19 +214,16 @@ nav .navigation-button:hover { color: var(--color-text); }
   justify-content: center;
 }
 
-/* Theme icon */
+/* Theme toggle: goldenrod base, white on hover */
+.theme-toggle { color: var(--color-accent); }
+.theme-toggle:hover { color: var(--color-on-image); }
 .theme-icon {
   width: 24px;
   height: 24px;
-  fill: none;
-/*  stroke: var(--color-accent);
-  stroke-width: 2;*/
-  transition: transform var(--tr-med), stroke var(--tr-med);
+  display: block;
+  transition: transform var(--tr-med), color var(--tr-med);
 }
-.theme-toggle:hover .theme-icon {
-  transform: scale(1.1);
-  stroke: var(--color-text);
-}
+.theme-toggle:hover .theme-icon { transform: scale(1.1); }
 
 /* Hamburger */
 .menu-icon { display: none; }
@@ -224,9 +240,9 @@ nav .navigation-button:hover { color: var(--color-text); }
   stroke: var(--color-text);
 }
 
-/* ---------------------------
+/* ---------------------------------------
    Main (Hero)
----------------------------- */
+---------------------------------------- */
 main {
   grid-column: 1 / 2;
   display: flex;
@@ -238,11 +254,19 @@ main {
 }
 
 .background-image {
-  position: absolute; 
+  position: absolute;
   inset: 0;
-  background-image: url('assets/mainplaceholder.webp');
-  background-size: cover;
-  background-position: top;
+  /* Layers: [grain] + [tint] + [photo] */
+  background-image:
+    var(--grain-svg),
+    linear-gradient(rgba(var(--img-tint-rgb), var(--img-tint-op)), rgba(var(--img-tint-rgb), var(--img-tint-op))),
+    url('assets/mainplaceholder.webp');
+  background-repeat: repeat, no-repeat, no-repeat;
+  background-size: 180px 180px, cover, cover;
+  background-position: center, center, top;
+  background-blend-mode: overlay, multiply, normal;
+
+  filter: saturate(var(--img-sat)) contrast(var(--img-ctr)) brightness(var(--img-bri));
   z-index: 0;
 }
 
@@ -295,33 +319,33 @@ main {
   color: var(--color-on-image);
 }
 
-/* ---------------------------
+/* ---------------------------------------
    Sidebar
----------------------------- */
+---------------------------------------- */
 aside {
   grid-column: 2;
-  grid-row: 2 / 4;              /* span MAIN + RECENT */
+  grid-row: 2 / 4;   /* span MAIN + RECENT */
   background: var(--color-surface);
-  display: block;               /* let inner container control layout */
+  display: block;    /* inner container controls layout */
 }
 
 .sidebar-container{
   display: flex;
   flex-direction: column;
-  height: 100%;                 /* fill full aside height */
+  height: 100%;      /* fill full aside height */
   width: 100%;
   align-items: stretch;
-  justify-content: stretch;     /* let slots expand */
+  justify-content: stretch; /* let slots expand */
   background: var(--color-surface);
-  min-height: 0;                /* allow flex children to shrink if needed */
+  min-height: 0;     /* allow flex children to shrink if needed */
 }
 
-/* Popular stays fixed; it won't grow */
+/* Popular stays fixed height */
 .sidebar-popular{
-  flex: 0 0 auto;               /* fixed-size header */
+  flex: 0 0 auto;
   background: var(--color-surface);
   color: var(--color-accent);
-  padding: 1.25em;
+  padding: 25px;
   font-variant-caps: all-small-caps;
   font-size: 1.25rem;
   border-bottom: 1px solid var(--color-border);
@@ -329,26 +353,26 @@ aside {
 
 /* Each slot expands equally to fill remaining space */
 .sidebar-slot {
-  flex: 1 1 0;                  /* equal-height columns */
-  min-height: 0;                /* avoid overflow creating extra bar */
+  flex: 1 1 0;
+  min-height: 0;               /* avoid phantom bar */
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
   position: relative;
   width: 100%;
   display: flex;
-  align-items: stretch;         /* child overlay fills height */
-  overflow: hidden;             /* trim overflow from long titles */
+  align-items: stretch;        /* child overlay fills height */
+  overflow: hidden;            /* trim long titles */
 }
 .sidebar-slot:last-child { border-bottom: none; }
 
-/* NO gradient: just text, and only color change on hover */
+/* Text-only hover + subtle solid background */
 .sidebar-image-overlay {
-  flex: 1 1 auto;               /* fill slot height */
+  flex: 1 1 auto;
   height: 100%;
   width: 100%;
   position: relative;
   z-index: 1;
-  padding: 1rem 1.5rem;
+  padding: 1.5rem 1.5rem;
   display: flex;
   flex-direction: column;
   background: transparent;
@@ -357,23 +381,20 @@ aside {
 }
 .sidebar-image-overlay .title {
   color: var(--color-text);
-  font-size: clamp(1rem, 1.05vw, 1.1rem);  /* smaller and consistent */
+  font-size: clamp(1rem, 1.05vw, 1.1rem);
   line-height: 1.3;
 }
-.sidebar-image-overlay .date  {
+.sidebar-image-overlay .date {
   color: var(--color-accent);
   font-size: 1rem;
-  margin-top: auto;             /* push date to bottom */
+  margin-top: auto;            /* push date to bottom */
 }
-
-/* Text-only hover + subtle solid background */
-
 .sidebar-image-overlay:hover { background: var(--overlay-weak); }
 
-/* ---------------------------
+/* ---------------------------------------
    Recent (Section)
----------------------------- */
-section {
+---------------------------------------- */
+section.recent {
   grid-column: 1 / 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -390,26 +411,22 @@ section {
   border-right: 1px solid var(--color-border);
 }
 
-/* anchor fills card height */
 .recent-article {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-/* overlay fills the entire tile so hover covers everything */
 .recent-article .overlay {
-  flex: 1;                 /* fill parent */
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 1.5em;
-  background: transparent; /* no gradient */
+  background: transparent;
   transition: background var(--tr-med);
 }
-.recent-article .overlay:hover {
-  background: var(--overlay-weak); /* subtle solid hover */
-}
+.recent-article .overlay:hover { background: var(--overlay-weak); }
 
 .recent-article .title {
   font-size: clamp(1.1rem, 2vw, 1.2rem);
@@ -421,20 +438,18 @@ section {
   max-width: 65ch;
   color: var(--color-text);
 }
-
-/* bottom-aligned date (consistent) */
 .recent-article .date {
   color: var(--color-accent);
   font-size: 1rem;
   margin-top: 1em;
 }
 
-/* ---------------------------
+/* ---------------------------------------
    Carousel
----------------------------- */
+---------------------------------------- */
 .carousel-recommended{
   grid-column: 1 / -1;
-  padding: 24px;
+  padding: 25px;
   background: var(--color-surface);
   color: var(--color-accent);
   font-variant-caps: all-small-caps;
@@ -453,15 +468,15 @@ section {
   gap: 1px;
 }
 
-/* slide images */
-.carousel-slot:nth-child(1) { background-image: url('assets/recent2.jpg'); }
-.carousel-slot:nth-child(2) { background-image: url('assets/modelmain.avif'); }
-.carousel-slot:nth-child(3) { background-image: url('assets/side3.jpg'); }
-.carousel-slot:nth-child(4) { background-image: url('assets/side2.jpg'); }
-.carousel-slot:nth-child(5) { background-image: url('assets/side4.png'); }
-.carousel-slot:nth-child(6) { background-image: url('assets/side1.jpg'); }
-.carousel-slot:nth-child(7) { background-image: url('assets/recent1.png'); }
-.carousel-slot:nth-child(8) { background-image: url('assets/sideplaceholder.jpg'); }
+/* Assign per-slide image via CSS var */
+.carousel-slot:nth-child(1){ --slot-bg: url('assets/recent2.jpg'); }
+.carousel-slot:nth-child(2){ --slot-bg: url('assets/modelmain.avif'); }
+.carousel-slot:nth-child(3){ --slot-bg: url('assets/side3.jpg'); }
+.carousel-slot:nth-child(4){ --slot-bg: url('assets/side2.jpg'); }
+.carousel-slot:nth-child(5){ --slot-bg: url('assets/side4.png'); }
+.carousel-slot:nth-child(6){ --slot-bg: url('assets/side1.jpg'); }
+.carousel-slot:nth-child(7){ --slot-bg: url('assets/recent1.png'); }
+.carousel-slot:nth-child(8){ --slot-bg: url('assets/sideplaceholder.jpg'); }
 
 .carousel-slot {
   flex: 0 0 25%;
@@ -470,33 +485,37 @@ section {
   position: relative;
   align-items: center;
   justify-content: center;
-  background-size: cover;
-  background-position: center;
+
+  /* One cover photo + tint + grain */
+  background-image:
+    var(--grain-svg),
+    linear-gradient(rgba(var(--img-tint-rgb), var(--img-tint-op)), rgba(var(--img-tint-rgb), var(--img-tint-op))),
+    var(--slot-bg);
+  background-repeat: repeat, no-repeat, no-repeat;
+  background-size: 180px 180px, cover, cover; /* photo is cover; grain tiles */
+  background-position: center, center, center;
+  background-blend-mode: overlay, multiply, normal;
+
+  filter: saturate(var(--img-sat)) contrast(var(--img-ctr)) brightness(var(--img-bri));
 }
 
-/* overlay panel on each slide */
-.carousel-overlay {
+/* Overlay pinned to bottom; expands upward on hover */
+.carousel-overlay{
   position: absolute;
-  bottom: 0;
-  width: 100%;
+  bottom: 0; left: 0; right: 0;
+  z-index: 1;
   height: 30%;
-  padding: 1.25em;
+  padding: 1.25em 1.25em 4em;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   background: var(--overlay);
   border-top: 1px solid rgba(255,255,255,0.25);
   transition: height 0.4s ease, background 0.4s ease;
-  padding-bottom: 4em;
 }
-
 .carousel-slot:hover .carousel-overlay { height: 100%; }
 
-.carousel-slot .carousel-content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25em;
-}
+.carousel-slot .carousel-content { display: flex; flex-direction: column; gap: 0.25em; }
 
 .carousel-slot .carousel-title,
 .carousel-slot .carousel-description {
@@ -505,20 +524,17 @@ section {
   display: -webkit-box;
   -webkit-box-orient: vertical;
 }
-
 .carousel-slot .carousel-title {
   font-size: 1.3rem;
   transition: all var(--tr-med);
   -webkit-line-clamp: 1;
 }
-
 .carousel-slot .carousel-description {
   -webkit-line-clamp: 1;
   opacity: 0;
   transition: opacity var(--tr-fast), -webkit-line-clamp 0s 0.4s;
   margin-bottom: 3em;
 }
-
 .carousel-slot:hover .carousel-description {
   -webkit-line-clamp: 6;
   opacity: 1;
@@ -544,7 +560,6 @@ section {
   padding: 1rem 0;
   background: var(--color-surface);
 }
-
 .prevnext-button {
   border: none;
   background: transparent;
@@ -555,7 +570,6 @@ section {
   transition: color var(--tr-med), opacity var(--tr-med);
 }
 .prevnext-button:hover { color: var(--color-text); }
-
 .carousel-dots .dot {
   width: 12px;
   height: 12px;
@@ -567,9 +581,9 @@ section {
 .carousel-dots .dot:hover { transform: scale(1.1); }
 .carousel-dots .dot.active { background: var(--color-accent); }
 
-/* ---------------------------
+/* ---------------------------------------
    Footer
----------------------------- */
+---------------------------------------- */
 footer {
   grid-column: 1 / -1;
   background: var(--color-surface);
@@ -589,11 +603,11 @@ footer * {
   flex-direction: column;
   transition: color var(--tr-med);
 }
-footer * :hover{ color: var(--color-text); }
+footer * :hover { color: var(--color-text); }
 
-/* ---------------------------
+/* ---------------------------------------
    Responsive
----------------------------- */
+---------------------------------------- */
 @media (max-width: 1000px) {
   header, footer { min-height: 40px; }
 
@@ -602,15 +616,21 @@ footer * :hover{ color: var(--color-text); }
     grid-template-rows: auto 1fr auto auto auto;
   }
 
-  nav{ display: none; }
+  nav.site-nav { display: none; }
   .menu-icon { display: flex; }
 
   main { grid-column: 1; grid-row: 2; }
-  section { grid-column: 1; grid-row: 3; }
+  section.recent { grid-column: 1; grid-row: 3; }
   aside { grid-column: 1; grid-row: 4; }
   .carousel-recommended { grid-column: 1; grid-row: 5; }
   .carousel-wrapper { grid-column: 1; grid-row: 6; }
   footer { grid-column: 1; grid-row: 8; }
 
   .sidebar-popular{ border-top: 1px solid var(--color-border); }
+
+  /* Sidebar: stack, let content define height */
+  aside { display: block; }
+  .sidebar-container { height: auto; min-height: 0; }
+  .sidebar-slot { flex: 0 0 auto; align-items: stretch; }
+  .sidebar-image-overlay { min-height: 84px; }
 }
